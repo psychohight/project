@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Boutique d'Artisanat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- En-tête du site -->
+    <header>
+        <h1>Boutique d'Artisanat</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="index6.html">Accueil</a></li>
+            <li><a href="boutique.html">Boutique</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Infos &#9662;</a>
+                <div class="dropdown-content">
+                    <a href="#">Option 1</a>
+                    <a href="#">Option 2</a>
+                    <a href="#">Option 3</a>
+                </div>
+            </li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="enregistrement.html">S'enregistrer</a></li>
+            <li><a href="admin.html">Admin</a></li>
+            <li><a href="panier.html">Panier (<span id="cart-count">0</span>)</a></li>
+        </ul>
+    </nav>
+    <!-- Bannière -->
+    <div class="banner">
+        <h2>Découvrez nos créations uniques</h2>
+        <a href="enregistrement.html" class="btn-register">S'enregistrer</a>
+    </div>
+
+    <!-- Section À Propos -->
+    <section class="about-section">
+        
+        <div class="about-block">
+        <div class="about-image">
+            <img src="images/ceinture1-0.jpg" alt="Votre Image 1">
+        </div>
+        <div class="about-text">
+            <h2>Qui suis-je ?</h2>
+            <p>
+            Je suis [votre nom], un artisan passionné par [votre domaine d'artisanat]. Mon parcours a commencé...
+            Je suis [votre nom], un artisan passionné par [votre domaine d'artisanat]. Mon parcours a commencé...
+            </p>
+        </div>
+        </div>
+            
+        <div class="about-block reverse">
+        <div class="about-image">
+            <img src="images/ceinture1-0.jpg" alt="Votre Image 2">
+        </div>
+        <div class="about-text">
+            <h2>D'où je viens ?</h2>
+            <p>
+            Originaire de [votre lieu d'origine], j'ai toujours été inspiré par...
+            Originaire de [votre lieu d'origine], j'ai toujours été inspiré par...
+            Originaire de [votre lieu d'origine], j'ai toujours été inspiré par.
+            </p>
+        </div>
+        </div>
+            
+        <div class="about-block">
+        <div class="about-image">
+        <img src="images/ceinture1-0.jpg" alt="Votre Image 3">
+        </div>
+        <div class="about-text">
+            <h2>Pourquoi je fais ce métier ?</h2>
+            <p>
+            La passion pour [votre domaine] m'a poussé à...
+            La passion pour [votre domaine] m'a poussé à...
+            La passion pour [votre domaine] m'a poussé à...
+            </p>
+        </div>
+        </div>
+    </section>
+
+<style>
+/* Styles généraux pour la navigation */
+nav {
+    background-color: #333;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+nav li {
+    float: left;
+    position: relative;
+}
+
+nav a {
+    display: block;
+    color: #ffffff;
+    text-decoration: none;
+    padding: 14px 20px;
+}
+
+nav a:hover {
+    background-color: #575757;
+}
+
+/* Styles spécifiques pour le menu déroulant */
+.dropdown .dropbtn {
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    min-width: 160px;
+    z-index: 1;
+    top: 100%;
+    left: 0;
+}
+
+.dropdown-content li {
+    float: none;
+}
+
+.dropdown-content a {
+    padding: 12px 16px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content.show {
+    display: block;
+}
+
+
+/* Styles pour la section À Propos */
+.about-section {
+    padding: 40px 20px;
+    background-color: #f8f6f600;
+}
+.about-block {
+    display: flex;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.about-block .about-image {
+    flex: 1;
+    padding: 10px;
+}
+.about-block .about-image img {
+    width: 60%;
+    height: auto;
+    border-radius: 10px;
+}
+
+.about-block .about-text {
+    flex: 1;
+    padding: 10px;
+}
+
+.about-block .about-text h2 {
+    margin-top: 0;
+}
+
+.about-block.reverse {
+    flex-direction: row-reverse;
+}
+
+/* Design Responsive */
+@media (max-width: 768px) {
+    .about-block {
+        flex-direction: column;
+        text-align: center;
+    }
+    .about-block.reverse {
+        flex-direction: column;
+    }
+    .about-block .about-text,
+    .about-block .about-image {
+        padding: 0;
+    }
+}
+
+</style>
+
+    <!-- Pied de page -->
+    <footer>
+        <p>&copy; 2024 Boutique d'Artisanat. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Script JavaScript -->
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var dropbtn = document.querySelector('.dropbtn');
+            var dropdownContent = document.querySelector('.dropdown-content');
+        
+            dropbtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                dropdownContent.classList.toggle('show');
+            });
+        
+            // Ferme le menu déroulant si l'utilisateur clique en dehors
+            window.addEventListener('click', function(event) {
+                if (!event.target.matches('.dropbtn')) {
+                    if (dropdownContent.classList.contains('show')) {
+                        dropdownContent.classList.remove('show');
+                    }
+                }
+            });
+        });
+        </script>
+               
+    <script>
+        // Code pour l'effet de flou lors du défilement
+        document.addEventListener('DOMContentLoaded', function() {
+            var produits = document.querySelectorAll('.produit');
+
+            var observer = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    } else {
+                        entry.target.classList.remove('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // L'élément est visible à 10%
+            });
+
+            produits.forEach(function(produit) {
+                observer.observe(produit);
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var cartCount = document.getElementById('cart-count');
+        
+            function updateCartCount() {
+                var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+                cartCount.textContent = cartItems.length;
+            }
+        
+            updateCartCount();
+        });        
+    </script>
+
+</body>
+</html>
