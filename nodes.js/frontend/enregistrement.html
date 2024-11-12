@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Page d'Enregistrement</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4e1d2;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 50%;
+            margin: 50px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+        }
+        h2 {
+            text-align: center;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+        input[type="text"], input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+        }
+        input[type="submit"] {
+            display: block;
+            background-color: #ff6f61;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            margin: 20px auto 0;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        input[type="submit"]:hover {
+            background-color: #ff8a75;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Enregistrement</h2>
+        <form action="#" method="post">
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" required>
+
+            <label for="email">E-mail :</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="motdepasse">Mot de passe :</label>
+            <input type="password" id="motdepasse" name="motdepasse" required>
+
+            <input type="submit" value="S'enregistrer">
+        </form>
+    </div>
+
+</body>
+</html>

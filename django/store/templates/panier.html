@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Votre Panier</title>
+    <link rel="stylesheet" href="{% static 'boutique/style.css' %}">
+</head>
+<body>
+    <!-- En-tête du site -->
+    <header>
+        <h1>Votre Panier</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'boutique:index' %}">Accueil</a></li>
+            <li><a href="{% url 'boutique:boutique' %}">Boutique</a></li>
+            <li><a href="{% url 'boutique:panier' %}">Panier (<span id="cart-count">0</span>)</a></li>
+        </ul>
+    </nav>
+
+    <!-- Section du panier -->
+    <section class="panier">
+        <table>
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                    <th>Quantité</th>
+                    <th>Sous-total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="cart-items">
+                <!-- Les éléments du panier seront insérés ici -->
+            </tbody>
+        </table>
+        <div class="total">
+            <h3>Total : €<span id="total-price">0.00</span></h3>
+            <button id="clear-cart">Vider le Panier</button>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <p>&copy; 2024 Boutique d'Artisanat. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Script JavaScript -->
+    <script src="{% static 'boutique/js/panier.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,96 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Boutique d'Artisanat</title>
+    <link rel="stylesheet" href="{% static 'boutique/style.css' %}">
+</head>
+<body>
+    <!-- Canvas pour le fond d'écran animé -->
+    <canvas id="star-canvas"></canvas>
+   
+    <!-- En-tête du site -->
+    <header>
+        <h1>Boutique d'Artisanat</h1>
+    </header>
+
+    <!-- Navigation -->
+    <nav>
+        <ul>
+            <li><a href="{% url 'boutique:index' %}">Accueil</a></li>
+            <li><a href="{% url 'boutique:boutique' %}">Boutique</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">Infos &#9662;</a>
+                <div class="dropdown-content">
+                    <a href="#">Option 1</a>
+                    <a href="#">Option 2</a>
+                    <a href="#">Option 3</a>
+                </div>
+            </li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="{% url 'boutique:enregistrement' %}">S'enregistrer</a></li>
+            <li><a href="{% url 'boutique:admin' %}">Admin</a></li>
+            <li><a href="{% url 'boutique:panier' %}">Panier (<span id="cart-count">0</span>)</a></li>
+        </ul>
+    </nav>
+    <!-- Bannière -->
+    <div class="banner">
+        <h2>Découvrez nos créations uniques</h2>
+        <a href="{% url 'boutique:enregistrement' %}" class="btn-register">S'enregistrer</a>
+    </div>
+
+    <!-- Section À Propos -->
+    <section class="about-section">
+        
+        <div class="about-block">
+        <div class="about-image">
+            <img src="{% static 'boutique/images/ceinture1-0.jpg' %}" alt="Votre Image 1">
+        </div>
+        <div class="about-text">
+            <h2>Qui suis-je ?</h2>
+            <p>
+            Je suis [votre nom], un artisan passionné par [votre domaine d'artisanat]. Mon parcours a commencé...
+            Je suis [votre nom], un artisan passionné par [votre domaine d'artisanat]. Mon parcours a commencé...
+            </p>
+        </div>
+        </div>
+            
+        <div class="about-block reverse">
+        <div class="about-image">
+            <img src="{% static 'boutique/images/ceinture1-0.jpg' %}" alt="Votre Image 2">
+        </div>
+        <div class="about-text">
+            <h2>D'où je viens ?</h2>
+            <p>
+            Originaire de [votre lieu d'origine], j'ai toujours été inspiré par...
+            Originaire de [votre lieu d'origine], j'ai toujours été inspiré par...
+            Originaire de [votre lieu d'origine], j'ai toujours été inspiré par.
+            </p>
+        </div>
+        </div>
+            
+        <div class="about-block">
+        <div class="about-image">
+        <img src="{% static 'boutique/images/ceinture1-0.jpg' %}" alt="Votre Image 3">
+        </div>
+        <div class="about-text">
+            <h2>Pourquoi je fais ce métier ?</h2>
+            <p>
+            La passion pour [votre domaine] m'a poussé à...
+            La passion pour [votre domaine] m'a poussé à...
+            La passion pour [votre domaine] m'a poussé à...
+            </p>
+        </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <p>&copy; 2024 Boutique d'Artisanat. Tous droits réservés.</p>
+    </footer>
+
+    <!-- Script JavaScript -->
+    <script src="{% static 'boutique/js/script.js' %}"></script>
+</body>
+</html>
