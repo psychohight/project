@@ -1,0 +1,17 @@
+
+from django.shortcuts import render, get_object_or_404
+
+from store.models import Product 
+
+# Create your views here.
+def index(request):
+    products = Product.objects.all()
+    
+    return render(request, 'store/index.html', context={'products': products})
+
+def product_detail(request, slug):
+    get_object_or_404(Product, slug=slug)
+    return render(request, 'store/detail.html', context={'product': Product})
+
+def detail(request):
+    return render(request, 'store/detail.html')
