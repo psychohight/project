@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Boutique d'Artisanat</title>
-    <link rel="stylesheet" href="{% static 'boutique/style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
     <!-- Canvas pour le fond d'écran animé -->
@@ -18,8 +18,8 @@
     <!-- Navigation -->
     <nav>
         <ul>
-            <li><a href="{% url 'boutique:index' %}">Accueil</a></li>
-            <li><a href="{% url 'boutique:boutique' %}">Boutique</a></li>
+            <li><a href="{% url 'store:index' %}">Accueil</a></li>
+            <li><a href="{% url 'store:boutique' %}">Boutique</a></li>
             <li class="dropdown">
                 <a href="#" class="dropbtn">Infos &#9662;</a>
                 <div class="dropdown-content">
@@ -29,15 +29,15 @@
                 </div>
             </li>
             <li><a href="#">Contact</a></li>
-            <li><a href="{% url 'boutique:enregistrement' %}">S'enregistrer</a></li>
-            <li><a href="{% url 'boutique:admin' %}">Admin</a></li>
-            <li><a href="{% url 'boutique:panier' %}">Panier (<span id="cart-count">0</span>)</a></li>
+            <li><a href="{% url 'store:enregistrement' %}">S'enregistrer</a></li>
+            <li><a href="{% url 'admin:index' %}">Admin</a></li>
+            <li><a href="{% url 'store:panier' %}">Panier (<span id="cart-count">0</span>)</a></li>
         </ul>
     </nav>
     <!-- Bannière -->
     <div class="banner">
         <h2>Découvrez nos créations uniques</h2>
-        <a href="{% url 'boutique:enregistrement' %}" class="btn-register">S'enregistrer</a>
+        <a href="{% url 'store:enregistrement' %}" class="btn-register">S'enregistrer</a>
     </div>
 
     <!-- Section À Propos -->
@@ -45,7 +45,7 @@
         
         <div class="about-block">
         <div class="about-image">
-            <img src="{% static 'boutique/images/ceinture1-0.jpg' %}" alt="Votre Image 1">
+            <img src="{% static 'images/ceinture1-0.jpg' %}" alt="Votre Image 1">
         </div>
         <div class="about-text">
             <h2>Qui suis-je ?</h2>
@@ -58,7 +58,7 @@
             
         <div class="about-block reverse">
         <div class="about-image">
-            <img src="{% static 'boutique/images/ceinture1-0.jpg' %}" alt="Votre Image 2">
+            <img src="{% static 'images/ceinture1-0.jpg' %}" alt="Votre Image 2">
         </div>
         <div class="about-text">
             <h2>D'où je viens ?</h2>
@@ -72,7 +72,7 @@
             
         <div class="about-block">
         <div class="about-image">
-        <img src="{% static 'boutique/images/ceinture1-0.jpg' %}" alt="Votre Image 3">
+        <img src="{% static 'images/ceinture1-0.jpg' %}" alt="Votre Image 3">
         </div>
         <div class="about-text">
             <h2>Pourquoi je fais ce métier ?</h2>
@@ -91,6 +91,6 @@
     </footer>
 
     <!-- Script JavaScript -->
-    <script src="{% static 'boutique/js/script.js' %}"></script>
+    <script src="{% static 'index.js' %}"></script>
 </body>
 </html>
