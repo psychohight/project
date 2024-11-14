@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Votre Panier</title>
-    <link rel="stylesheet" href="{% static 'boutique/style.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
     <!-- En-tête du site -->
@@ -15,9 +15,9 @@
     <!-- Navigation -->
     <nav>
         <ul>
-            <li><a href="{% url 'boutique:index' %}">Accueil</a></li>
-            <li><a href="{% url 'boutique:boutique' %}">Boutique</a></li>
-            <li><a href="{% url 'boutique:panier' %}">Panier (<span id="cart-count">0</span>)</a></li>
+            <li><a href="{% url 'store:index' %}">Accueil</a></li>
+            <li><a href="{% url 'store:boutique' %}">Boutique</a></li>
+            <li><a href="{% url 'store:panier' %}">Panier (<span id="cart-count">0</span>)</a></li>
         </ul>
     </nav>
 
@@ -50,6 +50,6 @@
     </footer>
 
     <!-- Script JavaScript -->
-    <script src="{% static 'boutique/js/panier.js' %}"></script>
+    <script src="{% static 'panier.js' %}"></script>
 </body>
 </html>
