@@ -1,11 +1,16 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h1>Boutique</h1>
+    
 
 {% for product in products %}
     <h2>{{ product.name }}</h2>
-    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 250px;">
+    {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 250px;">
+        {% else %}
+            <p>Image non disponible</p>
+    {% endif %}
+    <a href="{{ product.get_absolute_url }}">Voir plus</a>
 {% endfor %}
 
 

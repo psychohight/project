@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse
 # Créer un modèle
 """
 Product
@@ -20,3 +20,6 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name # Affiche le nom du produit dans l'admin
+
+    def get_absolute_url(self):
+        return reverse('product', kwargs={"slug": self.slug}) # Redirige vers la page du produit

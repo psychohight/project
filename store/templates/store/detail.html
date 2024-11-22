@@ -4,7 +4,11 @@
     
     <h2>{{ product.name }}</h2>
     <h3>{{ product.price }} €</h3>
-    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 250px;">
+    {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 250px;">
+        {% else %}
+            <p>Image non disponible</p>
+    {% endif %}
     <p>{{ product.description }}</p>
     <p>{{ product.stock }}</p>
 
