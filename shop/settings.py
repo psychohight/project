@@ -55,7 +55,7 @@ ROOT_URLCONF = 'shop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "django/store/templates"], # Ajout du dossier frontend
+        'DIRS': [BASE_DIR / "templates"], # Ajout du dossier frontend
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'shop.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR / 'db.sqlite3'),
+        'NAME': '/home/psychohight/project/new_db.sqlite3',
     }
 }
 
@@ -124,4 +124,4 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'store/static')]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
+MEDIA_ROOT = '/home/psychohight/project/media'
