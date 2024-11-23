@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from shop.settings import AUTH_USER_MODEL
 # Créer un modèle
 """
 Product
@@ -23,3 +24,40 @@ class Product(models.Model):
 
     def get_absolute_url(self):
         return reverse('product', kwargs={"slug": self.slug}) # Redirige vers la page du produit
+    
+# article
+"""
+-utilisateur
+-produit
+-quantité
+-commande ou non
+"""
+
+class Order(models.Model):
+    user = models.ForeignKey(AUTH_USER_MODEL, on_delete=models.CASCADE) # Un utilisateur peut avoir plusieurs commandes
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    ordered = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.product.name} ({self.quantity})" # Affiche la quantité et le nom du produit dans l'admin
+
+
+
+
+# panier
+"""
+-utilisateur
+-articles
+-commande ou non
+-date de la commande
+"""
+
+class Cart(models.Model):
+    user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE) # Un utilisateur a un seul panier
+    orders = models.ManyToManyField(Order)
+    ordered = models.BooleanField(default=False)
+    ordered_date = models.DateTimeField(blank=True, null=True)
+
+    def __str__(self):
+        return self.user.username # Affiche le nom d'utilisateur dans l'admin

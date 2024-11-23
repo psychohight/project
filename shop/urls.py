@@ -19,10 +19,14 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 from store.views import index, product_detail
+from accounts.views import login_user, logout_user, signup
 
 urlpatterns = [
     path('', index, name='index'),
     path('admin/', admin.site.urls),
+    path('signup/', signup, name='signup'),
+    path('logout/', logout_user, name='logout'),
+    path('login/', login_user, name='login'),
     path('product/<str:slug>/', product_detail, name='product'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Permet de servir les fichiers médias en mode DEBUG
