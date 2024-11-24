@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from django.urls import reverse
 from shop.settings import AUTH_USER_MODEL
@@ -38,6 +39,7 @@ class Order(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     ordered = models.BooleanField(default=False)
+    ordered_date = models.DateTimeField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.product.name} ({self.quantity})" # Affiche la quantité et le nom du produit dans l'admin
@@ -56,8 +58,15 @@ class Order(models.Model):
 class Cart(models.Model):
     user = models.OneToOneField(AUTH_USER_MODEL, on_delete=models.CASCADE) # Un utilisateur a un seul panier
     orders = models.ManyToManyField(Order)
-    ordered = models.BooleanField(default=False)
-    ordered_date = models.DateTimeField(blank=True, null=True)
-
+    
     def __str__(self):
         return self.user.username # Affiche le nom d'utilisateur dans l'admin
+    
+    def delete(self, *args, **kwargs):      # Supprime les commandes du panier
+        for order in self.orders.all():
+            order.ordered = True
+            order.order_date = timezone.now()
+            order.save()
+            
+        self.orders.clear()                 # Supprime les commandes du panier
+        super().delete(*args, **kwargs)
