@@ -1,7 +1,11 @@
+import pprint
+from django.http import HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
+from django.utils import timezone
 import stripe
-
+from django.views.decorators.csrf import csrf_exempt
+from accounts.models import Shopper
 from shop import settings
 from store.models import Cart, Order, Product 
 
@@ -71,3 +75,49 @@ def delete_cart(request): # Vue pour supprimer le panier
         cart.delete()
         
     return redirect('index')
+
+@csrf_exempt
+def stripe_webhook(request): # Vue pour gérer les webhooks de Stripe
+    playload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    endpoint_secret = 'whsec_fa329b2814ba0e98fb0625445ebeb82d394e812870fe8ce627520bdec147608c' # Clé secrète de l'endpoint
+    event = None
+    
+    try:
+        event = stripe.Webhook.construct_event(
+            playload, sig_header, endpoint_secret 
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+    
+    if event['type'] == 'checkout.session.completed':
+        data = event['data']['object']
+        return complete_order(data)
+    
+    return HttpResponse(status=200)
+
+def complete_order(data):
+    try:
+        user_email = data['customer_details']['email']
+    except KeyError:
+        return HttpResponse('invalid user email', status=400)
+    
+    user = get_object_or_404(Shopper, email=user_email)
+    cart = user.cart
+    
+    if cart:
+        # Marquer toutes les commandes dans le panier comme "ordered"
+        for order in cart.orders.all():
+            order.ordered = True
+            order.save()
+
+        # Marquer le panier comme commandé
+        cart.ordered = True
+        cart.order_date = timezone.now()
+        cart.save()
+
+    return HttpResponse(status=200)

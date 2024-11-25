@@ -19,7 +19,6 @@
         <li><a href="#">Boutique</a></li>
         <li><a href="#">Infos</a></li>
         <li><a href="#">Contact</a></li>
-        <li><a href="{% url 'cart' %}">Panier</a></li>
         
         {% if user.is_authenticated %}
             {{ user.username }}
@@ -32,6 +31,9 @@
         <li><a href="{% url 'signup' %}">s'inscrire</a></li>
         {% endif %}
         
+        {% if user.cart and not user.cart.ordered %}
+        <li><a href="{% url 'cart' %}">Panier ({{ user.cart.orders.count }})</a></li>
+        {% endif %}
         
         
 

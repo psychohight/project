@@ -18,7 +18,7 @@ from shop import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
-from store.views import add_to_cart, cart, checkout_success, index, product_detail, delete_cart, create_checkout_session
+from store.views import add_to_cart, cart, checkout_success, index, product_detail, delete_cart, create_checkout_session, stripe_webhook
 from accounts.views import login_user, logout_user, signup
 
 urlpatterns = [
@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', signup, name='signup'),
     path('logout/', logout_user, name='logout'),
+    path('stripe-webhook/', stripe_webhook, name='stripe-webhook'),
     path('login/', login_user, name='login'),
     path('cart/', cart, name='cart'),
     path('cart/success', checkout_success, name='checkout-success'),
