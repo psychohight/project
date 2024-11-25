@@ -1,7 +1,11 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
+import stripe
 
+from shop import settings
 from store.models import Cart, Order, Product 
+
+
 
 # Create your views here.
 def index(request): # Vue pour afficher la page d'accueil
@@ -38,6 +42,27 @@ def cart(request): # Vue pour afficher le panier
     cart = get_object_or_404(Cart, user=request.user)
     
     return render(request, 'store/cart.html', context={'orders': cart.orders.all()}) # Affiche les commandes du panier
+
+def create_checkout_session(request): # Vue pour créer une session de paiement
+    stripe.api_key = settings.STRIPE_API_KEY
+    cart = request.user.cart
+    
+    line_items = [{'price': order.product.stripe_id, 
+                   'quantity': order.quantity} for order in cart.orders.all()]
+    
+    session = stripe.checkout.Session.create(
+        locale='fr',
+        payment_method_types=['card'],
+        line_items= line_items,
+        mode='payment',
+        success_url=request.build_absolute_uri(reverse('checkout-success')),
+        cancel_url='http://127.0.0.1:8000',
+    )
+    
+    return redirect(session.url, code=303)
+
+def checkout_success(request): # Vue pour afficher la page de paiement réussi
+    return render(request, 'store/success.html')
 
 def delete_cart(request): # Vue pour supprimer le panier
     cart = request.user.cart

@@ -1,28 +1,45 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Boutique d'Artisanat</title>
-    
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <script src="{% static 'index.js' %}" defer></script>
+    <link rel="stylesheet" href="{% static 'boutique.css' %}">
 </head>
 <body>
 
 <a href="{% url 'index' %}">
     <h1>Boutique</h1>
 </a>
+<nav>
+    <ul>
+        <li><a href="{% url 'index' %}">Accueil</a></li>
+        <li><a href="#">Boutique</a></li>
+        <li><a href="#">Infos</a></li>
+        <li><a href="#">Contact</a></li>
+        <li><a href="{% url 'cart' %}">Panier</a></li>
+        
+        {% if user.is_authenticated %}
+            {{ user.username }}
+            <li><a href="{% url 'logout' %}">se déconnecter</a></li>
+            {% if user.is_staff %}
+            <li><a href="{% url 'admin:index' %}">Admin</a></li>
+        {% endif %}
+        {% else %}
+        <li><a href="{% url 'login' %}">Connexion</a></li>
+        <li><a href="{% url 'signup' %}">s'inscrire</a></li>
+        {% endif %}
+        
+        
+        
 
-{% if user.is_authenticated %}
-    {{ user.username }}
-    <a href="{% url 'logout' %}">se déconnecter</a>
-{% else %}
-<a href="{% url 'login' %}">Connexion</a>
-<a href="{% url 'signup' %}">s'inscrire</a>
-{% endif %}
+        <li><a href="{% url 'admin:index' %}">Admin</a></li>
+    </ul>
+</nav>
 
-{% if user.cart %}
-<a href="{% url 'cart' %}">Panier ({{ user.cart.orders.count }})</a>
-{% endif %}
-
+<canvas id="star-canvas"></canvas>
 
 {% block content %}
 {% endblock %}

@@ -3,15 +3,22 @@
 {% block content %}
     
 
-{% for product in products %}
-    <h2>{{ product.name }}</h2>
-    {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 250px;">
+<section class="produits">
+    {% for product in products %}
+    <div class="produit" data-nom="{{ product.name }}" data-prix="{{ product.price }}" data-image="{{ product.image.url }}">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
         {% else %}
             <p>Image non disponible</p>
-    {% endif %}
-    <a href="{{ product.get_absolute_url }}">Voir plus</a>
-{% endfor %}
+        {% endif %}
+        <h3>{{ product.name }}</h3>
+        <p>€{{ product.price }}</p>
+        <a href="{{ product.get_absolute_url }}" class="btn-voir-plus">Voir plus</a>
+        <button class="btn-ajouter-panier" data-id="{{ product.id }}">Ajouter au panier</button>
+    </div>
+    {% endfor %}
+</section>
+
 
 
 {% endblock %}

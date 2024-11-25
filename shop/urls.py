@@ -17,8 +17,8 @@ Including another URLconf
 from shop import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
-from store.views import add_to_cart, cart, index, product_detail, delete_cart
+from django.urls import include, path
+from store.views import add_to_cart, cart, checkout_success, index, product_detail, delete_cart, create_checkout_session
 from accounts.views import login_user, logout_user, signup
 
 urlpatterns = [
@@ -28,6 +28,8 @@ urlpatterns = [
     path('logout/', logout_user, name='logout'),
     path('login/', login_user, name='login'),
     path('cart/', cart, name='cart'),
+    path('cart/success', checkout_success, name='checkout-success'),
+    path('cart/create-checkout-session', create_checkout_session, name='create-checkout-session'),
     path('cart/delete', delete_cart, name='delete-cart'),
     path('product/<str:slug>/', product_detail, name='product'),
     path('product/<str:slug>/add-to-cart/', add_to_cart, name='add-to-cart'),

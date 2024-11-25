@@ -19,6 +19,7 @@ class Product(models.Model):
     quantity = models.IntegerField(default=0)
     description = models.TextField(blank=True) # blank=True (l'admin n'est pas obligé de remplir ce champ)
     image = models.ImageField(upload_to='products/', blank=True, null=True) # null=True (l'admin n'est pas obligé de remplir ce champ)
+    stripe_id = models.CharField(max_length=90, blank=True) # Champ pour l'identifiant du produit sur Stripe
 
     def __str__(self):
         return self.name # Affiche le nom du produit dans l'admin

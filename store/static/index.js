@@ -39,18 +39,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Mise à jour du compteur du panier
-document.addEventListener('DOMContentLoaded', function() {
-    var cartCount = document.getElementById('cart-count');
-
-    function updateCartCount() {
-        var cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-        cartCount.textContent = cartItems.length;
-    }
-
-    updateCartCount();
-});
-
 // Animation du fond d'étoiles
 const canvas = document.getElementById('star-canvas');
 const ctx = canvas.getContext('2d');

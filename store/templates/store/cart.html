@@ -10,6 +10,11 @@
     
 {% endfor %}
 
+<form action="{% url 'create-checkout-session' %}" method="POST">
+    {% csrf_token %}
+    <button type='submit'>proceder au paiement</button>
+</form>
+
 <a href="{% url 'delete-cart' %}">supprimer le panier</a>
 
 
