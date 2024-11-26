@@ -19,11 +19,12 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
 from store.views import add_to_cart, cart, checkout_success, index, product_detail, delete_cart, create_checkout_session, stripe_webhook
-from accounts.views import login_user, logout_user, signup
+from accounts.views import login_user, logout_user, signup, profile
 
 urlpatterns = [
     path('', index, name='index'),
     path('admin/', admin.site.urls),
+    path('profile/', profile, name='profile'),
     path('signup/', signup, name='signup'),
     path('logout/', logout_user, name='logout'),
     path('stripe-webhook/', stripe_webhook, name='stripe-webhook'),

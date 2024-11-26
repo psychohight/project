@@ -1,4 +1,4 @@
-import pprint
+
 from django.http import HttpResponse
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
@@ -55,10 +55,12 @@ def create_checkout_session(request): # Vue pour créer une session de paiement
                    'quantity': order.quantity} for order in cart.orders.all()]
     
     session = stripe.checkout.Session.create(
-        locale='fr',
         payment_method_types=['card'],
         line_items= line_items,
         mode='payment',
+        locale='fr',
+        customer_email=request.user.email,
+        shipping_address_collection={'allowed_countries': ['FR', 'US']},
         success_url=request.build_absolute_uri(reverse('checkout-success')),
         cancel_url='http://127.0.0.1:8000',
     )
@@ -96,28 +98,22 @@ def stripe_webhook(request): # Vue pour gérer les webhooks de Stripe
     
     if event['type'] == 'checkout.session.completed':
         data = event['data']['object']
-        return complete_order(data)
+        try:
+            user = get_object_or_404(Shopper, email=data['customer_details']['email'])
+        except KeyError:
+            return HttpResponse('invalid user email', status=400)
+        
+        complete_order(data=data, user=user)
+        save_shipping_address(data=data, user=user)
+        return HttpResponse(status=200)
     
     return HttpResponse(status=200)
 
-def complete_order(data):
-    try:
-        user_email = data['customer_details']['email']
-    except KeyError:
-        return HttpResponse('invalid user email', status=400)
-    
-    user = get_object_or_404(Shopper, email=user_email)
-    cart = user.cart
-    
-    if cart:
-        # Marquer toutes les commandes dans le panier comme "ordered"
-        for order in cart.orders.all():
-            order.ordered = True
-            order.save()
-
-        # Marquer le panier comme commandé
-        cart.ordered = True
-        cart.order_date = timezone.now()
-        cart.save()
-
+def complete_order(data, user): # Vue pour compléter la commande
+    user.strip_id = data['customer']
+    user.cart.delete()
+    user.save()
     return HttpResponse(status=200)
+
+def save_shipping_address(data, user):
+    pass

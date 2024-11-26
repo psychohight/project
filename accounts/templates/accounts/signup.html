@@ -6,15 +6,14 @@
 <form method='post'>
     {% csrf_token %}
     <p>
-        <label for='username'>Nom d'utilisateur</label><br>
-        <input id='username' type='text' name="username">
+        <label for='email'>email</label><br>
+        <input id='email' type='text' name="email" required>
     </p>
     <p>
         <label for='password'>Mot de passe</label><br>
-        <input id='password' type='password' name="password">
+        <input id='password' type='password' name="password" required>
     </p>
     <button type='submit'>S'inscrire</button>
 </form>
-
 
 {% endblock %}
