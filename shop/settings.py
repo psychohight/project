@@ -134,3 +134,11 @@ MEDIA_ROOT = '/home/psychohight/project/media'
 AUTH_USER_MODEL = 'accounts.Shopper'
 
 STRIPE_API_KEY = env('STRIPE_API_KEY', default='')
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Utilisez le serveur SMTP de votre fournisseur d'email
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'enzo.tenis74@gmail.com'
+EMAIL_HOST_PASSWORD = 'bqvy bwoh qiyl vxjr'
+DEFAULT_FROM_EMAIL = 'Boutique d\'Artisanat <enzo.tenis74@gmail.com>'

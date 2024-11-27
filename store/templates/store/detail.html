@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    
+<link rel="stylesheet" href="{% static 'detail.css' %}">
+
+<div class="product-detail">
     <h2>{{ product.name }}</h2>
     <h3>{{ product.price }} €</h3>
     {% if product.image %}
@@ -17,4 +20,6 @@
     <p><a href="{% url 'add-to-cart' product.slug %}">Ajouter au panier</a></p>
 
     {% endif %}
+</div>
+
 {% endblock %}

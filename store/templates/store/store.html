@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'boutique.css' %}">
+
+<section class="produits">
+    {% for product in products %}
+    <a href="{{ product.get_absolute_url }}" class="produit-link">
+        <div class="produit" data-nom="{{ product.name }}" data-prix="{{ product.price }}" data-image="{{ product.image.url }}">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% else %}
+                <p>Image non disponible</p>
+            {% endif %}
+            <h3>{{ product.name }}</h3>
+            <p>€{{ product.price }}</p>
+        
+        </div>
+    </a>
+    {% endfor %}
+</section>
+
+
+
+{% endblock %}

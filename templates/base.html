@@ -5,30 +5,30 @@
     <meta charset="UTF-8">
     <title>Boutique d'Artisanat</title>
     <link rel="stylesheet" href="{% static 'style.css' %}">
-    <script src="{% static 'index.js' %}" defer></script>
-    <link rel="stylesheet" href="{% static 'boutique.css' %}">
+    <script src="{% static 'base.js' %}" defer></script>
 </head>
 <body>
 
-<a href="{% url 'index' %}">
-    <h1>Boutique</h1>
-</a>
+    <div class="title-container">
+        <h1>Sellerie la vie en rose</h1>
+    </div>
 <nav>
     <ul>
         <li><a href="{% url 'index' %}">Accueil</a></li>
-        <li><a href="#">Boutique</a></li>
+        <li><a href="{% url 'store' %}">Boutique</a></li>
         <li><a href="#">Infos</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
         
         {% if user.is_authenticated %}
-            {{ user.username }}
             <li><a href="{% url 'logout' %}">se déconnecter</a></li>
             {% if user.is_staff %}
             <li><a href="{% url 'admin:index' %}">Admin</a></li>
         {% endif %}
         {% else %}
-        <li><a href="{% url 'login' %}">Connexion</a></li>
-        <li><a href="{% url 'signup' %}">s'inscrire</a></li>
+        <div class="nav-right">
+            <li><a href="{% url 'login' %}">Connexion</a></li>
+            <li><a href="{% url 'signup' %}">s'inscrire</a></li>
+        </div>
         {% endif %}
         
         {% if user.cart and not user.cart.ordered %}
@@ -37,9 +37,7 @@
         
     </ul>
 </nav>
-
-<canvas id="star-canvas"></canvas>
-
+<div class="page"> 
 {% block content %}
 {% endblock %}
 

@@ -1,24 +1,66 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-    
+<link rel="stylesheet" href="{% static 'index.css' %}">
+<script src="{% static 'star.js' %}" defer></script>
 
-<section class="produits">
-    {% for product in products %}
-    <div class="produit" data-nom="{{ product.name }}" data-prix="{{ product.price }}" data-image="{{ product.image.url }}">
-        {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}">
-        {% else %}
-            <p>Image non disponible</p>
-        {% endif %}
-        <h3>{{ product.name }}</h3>
-        <p>€{{ product.price }}</p>
-        <a href="{{ product.get_absolute_url }}" class="btn-voir-plus">Voir plus</a>
 
+<section class="about-section">
+    <div class="about-block">
+        <div class="about-image">
+            <img src="{% static 'accueil/ceinture1-0.jpg' %}" alt="Votre Image 1">
+        </div>
+        <div class="about-text">
+            <h2>Qui suis-je ?</h2>
+            <p>
+                Je suis [votre nom], un artisan passionné par [votre domaine d'artisanat]. Mon parcours a commencé...
+                Je suis [votre nom], un artisan passionné par [votre domaine d'artisanat]. Mon parcours a commencé...
+            </p>
+        </div>
     </div>
-    {% endfor %}
+        
+    <div class="about-block reverse">
+        <div class="about-image">
+            <img src="{% static 'accueil/ceinture1-0.jpg' %}" alt="Votre Image 2">
+        </div>
+        <div class="about-text">
+            <h2>D'où je viens ?</h2>
+            <p>
+                Originaire de [votre lieu d'origine], j'ai toujours été inspiré par...
+                Originaire de [votre lieu d'origine], j'ai toujours été inspiré par...
+                Originaire de [votre lieu d'origine], j'ai toujours été inspiré par.
+            </p>
+        </div>
+    </div>
+        
+    <div class="about-block">
+        <div class="about-image">
+            <img src="{% static 'accueil/ceinture1-0.jpg' %}" alt="Votre Image 3">
+        </div>
+        <div class="about-text">
+            <h2>Pourquoi je fais ce métier ?</h2>
+            <p>
+                La passion pour [votre domaine] m'a poussé à...
+                La passion pour [votre domaine] m'a poussé à...
+                La passion pour [votre domaine] m'a poussé à...
+            </p>
+        </div>
+    </div>
+</section>
+
+<section class="location">
+    <h3>Où nous trouver</h3>
+    <p>Adresse : THONON-LES-BAINS</p>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d88087.625352072!2d6.395152052310965!3d46.374580148484505!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x478c3e897106ff93%3A0x408ab2ae4ba9680!2s74200%20Thonon-les-Bains!5e0!3m2!1sfr!2sfr!4v1732728933433!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </section>
 
 
+<canvas id="star-canvas"></canvas>
+
+<!-- Pied de page -->
+<footer>
+    <p>&copy; 2024 sellerie la vie en rose. Tous droits réservés.</p>
+</footer>
 
 {% endblock %}

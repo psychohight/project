@@ -18,13 +18,14 @@ from shop import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path
-from store.views import add_to_cart, cart, checkout_success, index, product_detail, delete_cart, create_checkout_session, stripe_webhook
-from accounts.views import login_user, logout_user, signup, profile
+from store.views import add_to_cart, cart, checkout_success, index, product_detail, delete_cart, create_checkout_session, store, stripe_webhook, remove_from_cart
+from accounts.views import login_user, logout_user, signup, profile, contact
 
 urlpatterns = [
     path('', index, name='index'),
     path('admin/', admin.site.urls),
     path('profile/', profile, name='profile'),
+    path('store/', store, name='store'),
     path('signup/', signup, name='signup'),
     path('logout/', logout_user, name='logout'),
     path('stripe-webhook/', stripe_webhook, name='stripe-webhook'),
@@ -35,6 +36,8 @@ urlpatterns = [
     path('cart/delete', delete_cart, name='delete-cart'),
     path('product/<str:slug>/', product_detail, name='product'),
     path('product/<str:slug>/add-to-cart/', add_to_cart, name='add-to-cart'),
+    path('remove-from-cart/<slug:slug>/', remove_from_cart, name='remove-from-cart'),
+    path('contact/', contact, name='contact'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # Permet de servir les fichiers médias en mode DEBUG
 

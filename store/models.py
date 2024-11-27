@@ -61,7 +61,8 @@ class Cart(models.Model):
     orders = models.ManyToManyField(Order)
     
     def __str__(self):
-        return self.user.username # Affiche le nom d'utilisateur dans l'admin
+        return self.user.username if self.user and self.user.username else "Panier sans utilisateur"
+
     
     def delete(self, *args, **kwargs):      # Supprime les commandes du panier
         for order in self.orders.all():
@@ -69,5 +70,6 @@ class Cart(models.Model):
             order.order_date = timezone.now()
             order.save()
             
-        self.orders.clear()                 # Supprime les commandes du panier
+        self.orders.clear()                 
         super().delete(*args, **kwargs)
+        

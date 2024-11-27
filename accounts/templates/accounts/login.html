@@ -1,20 +1,31 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 
+<link rel="stylesheet" href="{% static 'login.css' %}">
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+
 <h1>Connexion</h1>
-<form method='post'>
+
+<form method="post">
     {% csrf_token %}
     <p>
-        <label for='email'>email</label><br>
-        <input id='email' type='text' name="email">
+        <label for="email">Email</label><br>
+        <input id="email" type="text" name="email">
     </p>
     <p>
-        <label for='password'>Mot de passe</label><br>
-        <input id='password' type='password' name="password">
+        <label for="password">Mot de passe</label><br>
+        <input id="password" type="password" name="password">
     </p>
-    <button type='submit'>Connexion</button>
+    <button type="submit">Connexion</button>
 </form>
-
 
 {% endblock %}

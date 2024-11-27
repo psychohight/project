@@ -8,6 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 from accounts.models import Shopper
 from shop import settings
 from store.models import Cart, Order, Product 
+from django.core.mail import send_mail
+from django.contrib import messages
 
 
 
@@ -42,10 +44,12 @@ def add_to_cart(request, slug):
     return redirect(reverse('product', kwargs={'slug': slug})) # Redirige vers la page du produit
 
 
-def cart(request): # Vue pour afficher le panier
+def cart(request):  # Vue pour afficher le panier
     cart = get_object_or_404(Cart, user=request.user)
-    
-    return render(request, 'store/cart.html', context={'orders': cart.orders.all()}) # Affiche les commandes du panier
+    orders = cart.orders.all()
+    total_price = sum(order.product.price * order.quantity for order in orders)
+
+    return render(request, 'store/cart.html', context={'orders': orders, 'total_price': total_price})
 
 def create_checkout_session(request): # Vue pour créer une session de paiement
     stripe.api_key = settings.STRIPE_API_KEY
@@ -66,6 +70,23 @@ def create_checkout_session(request): # Vue pour créer une session de paiement
     )
     
     return redirect(session.url, code=303)
+
+def remove_from_cart(request, slug):
+    user = request.user
+    product = get_object_or_404(Product, slug=slug)
+    cart = get_object_or_404(Cart, user=user)
+
+    try:
+        order = cart.orders.get(product=product, ordered=False)
+        if order.quantity > 1:
+            order.quantity -= 1
+            order.save()
+        else:
+            cart.orders.remove(order)
+    except Order.DoesNotExist:
+        pass
+
+    return redirect('cart')
 
 def checkout_success(request): # Vue pour afficher la page de paiement réussi
     return render(request, 'store/success.html')
@@ -117,3 +138,8 @@ def complete_order(data, user): # Vue pour compléter la commande
 
 def save_shipping_address(data, user):
     pass
+
+def store(request): # Vue pour afficher la page boutique
+    products = Product.objects.all()
+    return render(request, 'store/store.html', context={'products': products})
+

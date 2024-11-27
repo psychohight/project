@@ -1,0 +1,96 @@
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 40px;
+}
+
+.cart-table th, .cart-table td {
+    padding: 15px;
+    border-bottom: 1px solid #dddddd00;
+    text-align: left;
+    font-size: 1em;
+    color: #333;
+}
+
+.cart-table th {
+    background-color: #6a025258;
+    font-weight: bold;
+}
+
+.cart-table td img {
+    width: 100px;
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart-summary {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.cart-summary .total {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.cart-summary button {
+    padding: 15px 30px;
+    background-color: #730257;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.cart-summary button:hover {
+    background-color: #019d287c;
+}
+
+.cart-summary a {
+    display: inline-block;
+    margin-top: 15px;
+    color: #fc1702;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+}
+
+.cart-summary a:hover {
+    color: #fc0404;
+}
+
+
+/* Design Responsive */
+@media (max-width: 768px) {
+    .cart-table {
+        font-size: 0.9em;
+    }
+
+    .cart-summary .total {
+        font-size: 1.5em;
+    }
+}
+.remove-btn {
+    background-color: #ff01065f; /* Couleur rouge */
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.remove-btn:hover {
+    background-color: #e60000; /* Couleur rouge foncé au survol */
+}
+
+.remove-btn i {
+    margin-right: 5px; /* Espace entre l'icône et le texte */
+}
