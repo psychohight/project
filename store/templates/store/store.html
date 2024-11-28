@@ -7,7 +7,7 @@
 <section class="produits">
     {% for product in products %}
     <a href="{{ product.get_absolute_url }}" class="produit-link">
-        <div class="produit" data-nom="{{ product.name }}" data-prix="{{ product.price }}" data-image="{{ product.image.url }}">
+        <div class="produit" data-nom="{{ product.name }}" data-prix="{{ product.price }}" data-image="{% if produit.image %}{{ produit.image.url }}{% else %}Image non disponible{% endif %}">
             {% if product.image %}
                 <img src="{{ product.image.url }}" alt="{{ product.name }}">
             {% else %}
