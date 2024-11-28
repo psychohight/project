@@ -14,7 +14,7 @@ An e-commerce website for selling artisanal products, specialized in saddlery it
 - HTML, CSS, JavaScript for the front-end.
 - Django (Python) for the back-end.
 - Stripe API for online payment processing.
-- Google (various APIs or tools).
+- Google  (for email services).
 - SQLite for the database.
 
 ## Installation
