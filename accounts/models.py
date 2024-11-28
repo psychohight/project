@@ -18,9 +18,9 @@ class CustomUserManager(BaseUserManager): # Créer un gestionnaire d'utilisateur
     
     
     def create_superuser(self, email, password, **kwargs):
-        kwargs['is_staff'] = True           # Superuser a accès à l'admin
-        kwargs['is_superuser'] = True       # Superuser a tous les droits
-        kwargs['is_active'] = True          
+        kwargs['is_staff'] = True           # accès à l'admin
+        kwargs['is_superuser'] = True       # tous les droits
+        kwargs['is_active'] = True
         
         return self.create_user(email=email, password=password, **kwargs)
 
